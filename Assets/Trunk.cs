@@ -10,13 +10,9 @@ public class Trunk : MonoBehaviour {
     private SpriteRenderer spriteRenderer;
     private bool packageStored = false;
 
-    void Start() {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
+    void Start() => spriteRenderer = GetComponent<SpriteRenderer>();
 
-    public bool hasPackage() {
-        return packageStored;
-    }
+    public bool hasPackage() => packageStored;
 
     public void pickUpPackage() {
         packageStored = true;
