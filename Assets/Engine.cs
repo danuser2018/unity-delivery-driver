@@ -10,19 +10,14 @@ public class Engine : MonoBehaviour
 
     private bool boosted = false;
 
-    public float getSteerSpeed() {
-        return steerSpeed;
-    }
+    public float getSteerSpeed() => steerSpeed;
 
     public float getMoveSpeed() {
-        if (boosted) {
+        if (boosted) 
             return boostSpeed;
-        } else {
+        else
             return slowSpeed;
-        }
-    }
+    }    
 
-    public void setBoosted(bool value) {
-        boosted = value;
-    }
+    public void setBoosted(bool value) => boosted = value;
 }

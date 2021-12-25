@@ -8,12 +8,7 @@ public class FollowCamera : MonoBehaviour {
 
     [SerializeField] GameObject objectToFollow;
 
-    void LateUpdate() {
-        transform.position = getObjectToFollowPosition() + CAMERA_OFFSET;
-    }
+    void LateUpdate() => transform.position = getObjectToFollowPosition() + CAMERA_OFFSET;
 
-    private Vector3 getObjectToFollowPosition() {
-        return objectToFollow.transform.position;
-    }
-    
+    private Vector3 getObjectToFollowPosition() => objectToFollow.transform.position;
 }    

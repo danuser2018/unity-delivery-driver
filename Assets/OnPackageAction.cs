@@ -10,9 +10,7 @@ public class OnPackageAction : MonoBehaviour {
 
     private Trunk trunk;
 
-    void Start() {
-        trunk = GetComponent<Trunk>();
-    }
+    void Start() => trunk = GetComponent<Trunk>();
 
     void OnTriggerEnter2D(Collider2D other) {
         if (isPackage(other) && canPickUpPackage()) {
@@ -21,19 +19,11 @@ public class OnPackageAction : MonoBehaviour {
         }
     }
 
-    private bool isPackage(Collider2D obj) {
-        return obj.tag == PACKAGE_TAG;
-    }
+    private bool isPackage(Collider2D obj) => obj.tag == PACKAGE_TAG;
 
-    private bool canPickUpPackage() {
-        return !trunk.hasPackage();
-    }
+    private bool canPickUpPackage() => !trunk.hasPackage();
 
-    private void pickUpPackage() {
-        trunk.pickUpPackage();
-    }
+    private void pickUpPackage() => trunk.pickUpPackage();
 
-    private void destroyPackage(Collider2D package) {
-        Destroy(package.gameObject, secsToDestroy);
-    }
+    private void destroyPackage(Collider2D package) => Destroy(package.gameObject, secsToDestroy);
 }
