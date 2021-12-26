@@ -6,7 +6,7 @@ public class OnDeliveryLocationAction : MonoBehaviour {
 
     private const string DELIVERY_LOCATION_TAG = "Delivery Location";
 
-    private TrunkManager.Trunk trunk;
+    private Trunk trunk;
     private SpriteRenderer spriteRenderer;
 
     void Start() {

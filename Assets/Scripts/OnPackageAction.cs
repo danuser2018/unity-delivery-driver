@@ -8,7 +8,7 @@ public class OnPackageAction : MonoBehaviour {
 
     [SerializeField] float secsToDestroy;
 
-    private TrunkManager.Trunk trunk;
+    private Trunk trunk;
     private SpriteRenderer spriteRenderer;
 
     void Start() {

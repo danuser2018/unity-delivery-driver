@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class OnObstacleAction : MonoBehaviour {
 
-    private EngineManager.Engine engine;
+    private Engine engine;
 
     void Start() => engine = GetComponent<EngineManager>().engine;        
 
-    void OnCollisionEnter2D(Collision2D other) => engine.setBoosted(false);
+    void OnCollisionEnter2D(Collision2D other) => engine.deactivateBoost();
 }
