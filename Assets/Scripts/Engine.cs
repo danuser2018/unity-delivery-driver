@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Engine : MonoBehaviour
-{
+public class Engine : MonoBehaviour {
     [SerializeField] private float steerSpeed;
     [SerializeField] private float slowSpeed;
     [SerializeField] private float boostSpeed;
@@ -20,4 +19,6 @@ public class Engine : MonoBehaviour
     }    
 
     public void setBoosted(bool value) => boosted = value;
+
+    public bool getBoosted() => boosted;
 }
