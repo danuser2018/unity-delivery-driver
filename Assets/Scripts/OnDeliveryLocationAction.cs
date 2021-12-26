@@ -7,17 +7,22 @@ public class OnDeliveryLocationAction : MonoBehaviour {
     private const string DELIVERY_LOCATION_TAG = "Delivery Location";
 
     private Trunk trunk;
+    private SpriteRenderer spriteRenderer;
 
-    void Start() => trunk = GetComponent<Trunk>();
+    void Start() {
+        trunk = GetComponent<TrunkManager>().trunk;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (isDeliveryLocation(other) && canDeliverPackage())
+        if (isDeliveryLocation(other) && trunk.canDeliverPackage())
             deliverPackage();
     }
 
     private bool isDeliveryLocation(Collider2D obj) => obj.tag == DELIVERY_LOCATION_TAG;
 
-    private bool canDeliverPackage() => trunk.hasPackage();
-
-    private void deliverPackage() => trunk.deliverPackage();
+    private void deliverPackage() {
+        trunk.deliverPackage();
+        spriteRenderer.color = trunk.getColor();
+    }    
 }

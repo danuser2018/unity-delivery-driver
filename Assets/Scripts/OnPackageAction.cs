@@ -9,11 +9,15 @@ public class OnPackageAction : MonoBehaviour {
     [SerializeField] float secsToDestroy;
 
     private Trunk trunk;
+    private SpriteRenderer spriteRenderer;
 
-    void Start() => trunk = GetComponent<Trunk>();
+    void Start() {
+        trunk = GetComponent<TrunkManager>().trunk;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    } 
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (isPackage(other) && canPickUpPackage()) {
+        if (isPackage(other) && trunk.canPickUpPackage()) {
             pickUpPackage();
             destroyPackage(other);
         }
@@ -21,9 +25,10 @@ public class OnPackageAction : MonoBehaviour {
 
     private bool isPackage(Collider2D obj) => obj.tag == PACKAGE_TAG;
 
-    private bool canPickUpPackage() => !trunk.hasPackage();
-
-    private void pickUpPackage() => trunk.pickUpPackage();
+    private void pickUpPackage() {
+        trunk.pickUpPackage();
+        spriteRenderer.color = trunk.getColor();
+    }    
 
     private void destroyPackage(Collider2D package) => Destroy(package.gameObject, secsToDestroy);
 }

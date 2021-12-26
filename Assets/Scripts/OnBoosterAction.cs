@@ -8,11 +8,11 @@ public class OnBoosterAction : MonoBehaviour {
 
     private Engine engine;
 
-    void Start() => engine = GetComponent<Engine>();
+    void Start() => engine = GetComponent<EngineManager>().engine;
 
     void OnTriggerEnter2D(Collider2D other) {
         if (isBooster(other)) 
-            engine.setBoosted(true);
+            engine.activateBoost();
     }
 
     private bool isBooster(Collider2D obj) => obj.tag == BOOSTER_TAG;
