@@ -6,10 +6,10 @@ public class Driver : MonoBehaviour {
 
     private const string STEER_AXIS_NAME = "Horizontal";
     private const string MOVE_AXIS_NAME = "Vertical";
+    
+    private EngineManager.Engine engine;
 
-    private Engine engine;
-
-    void Start() => engine = GetComponent<Engine>();        
+    void Start() => engine = GetComponent<EngineManager>().engine;
 
     void Update() {
         rotate();

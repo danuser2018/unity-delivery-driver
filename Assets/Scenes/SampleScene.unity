@@ -3983,7 +3983,7 @@ GameObject:
   - component: {fileID: 1710815772}
   - component: {fileID: 1710815775}
   - component: {fileID: 1710815776}
-  - component: {fileID: 1710815778}
+  - component: {fileID: 1710815783}
   - component: {fileID: 1710815782}
   - component: {fileID: 1710815771}
   - component: {fileID: 1710815780}
@@ -4135,21 +4135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367e5b897c527fc4cb5414f76742e0dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1710815778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1710815770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d97f81f66f81c841b59e2bc169bc812, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  steerSpeed: 200
-  slowSpeed: 20
-  boostSpeed: 35
 --- !u!114 &1710815779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4205,6 +4190,21 @@ MonoBehaviour:
   noPackageColor:
     serializedVersion: 2
     rgba: 4294967295
+--- !u!114 &1710815783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710815770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d97f81f66f81c841b59e2bc169bc812, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  steerSpeed: 200
+  slowSpeed: 20
+  boostSpeed: 35
 --- !u!1 &1726669608
 GameObject:
   m_ObjectHideFlags: 0

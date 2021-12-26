@@ -6,9 +6,9 @@ public class OnBoosterAction : MonoBehaviour {
 
     private const string BOOSTER_TAG = "Booster";
 
-    private Engine engine;
+    private EngineManager.Engine engine;
 
-    void Start() => engine = GetComponent<Engine>();
+    void Start() => engine = GetComponent<EngineManager>().engine;
 
     void OnTriggerEnter2D(Collider2D other) {
         if (isBooster(other)) 
