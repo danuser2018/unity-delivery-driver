@@ -11,9 +11,8 @@ jobs:
       fail-fast: false
       matrix:
         projectPath:
-          - test-project
+          - unity-delivery-driver
         testMode:
-          - playmode
           - editmode
     steps:
       - uses: actions/checkout@v2
