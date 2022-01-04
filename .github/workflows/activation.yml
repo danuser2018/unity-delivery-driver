@@ -5,7 +5,7 @@ on:
 
 env:
   # License
-  ULF_FILE: Unity_v2021.2.5f1.ulf
+  ULF_FILE: Unity_v2021.x.ulf
   # Project
   UNITY_VERSION: 2021.2.5f1
 
@@ -68,7 +68,7 @@ jobs:
         id: ulfRead
         uses: juliangruber/read-file-action@v1.1.4
         with:
-          path: ./${{ env.ULF_FILE }}
+          path: ${{ env.ULF_FILE }}
 
       - name: Update secret UNITY_LICENSE
         uses: hmanzur/actions-set-secret@v2.0.0
