@@ -61,16 +61,11 @@ jobs:
         continue-on-error: true
         run: unity-license-activate "${{ secrets.UNITY_EMAIL }}" "${{ secrets.UNITY_PASSWORD }}" "${{ needs.request_alf.outputs.alf }}" --password "${{ secrets.EMAIL_PASSWORD }}"
 
-      - name: Download .ulf artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: ${{ env.ULF_FILE }}
-
       - name: Read ulf
         id: ulfRead
         uses: juliangruber/read-file-action@v1.1.4
         with:
-          path: ${{ env.ULF_FILE }}
+          path: ./${{ env.ULF_FILE }}
 
       - name: Update secret UNITY_LICENSE
         uses: hmanzur/actions-set-secret@v2.0.0
