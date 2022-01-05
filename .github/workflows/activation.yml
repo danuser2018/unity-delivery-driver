@@ -61,9 +61,6 @@ jobs:
         continue-on-error: true
         run: unity-license-activate "${{ secrets.UNITY_EMAIL }}" "${{ secrets.UNITY_PASSWORD }}" "${{ needs.request_alf.outputs.alf }}" --password "${{ secrets.EMAIL_PASSWORD }}"
 
-      - name: Making a LS
-        run: ls -la
-        
       - name: Read ulf
         id: ulfRead
         uses: juliangruber/read-file-action@v1.1.4
