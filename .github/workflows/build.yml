@@ -22,33 +22,6 @@ jobs:
         run: |
             echo "Skip activation job: ${{ env.UNITY_LICENSE != '' }}"
             echo "::set-output name=is_unity_license_set::${{ env.UNITY_LICENSE != '' }}"
-  test:
-    needs: [checklicense]
-    if: needs.checklicense.outputs.is_unity_license_set == 'true'
-    name: Test all modes ✨
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          lfs: true
-      - uses: actions/cache@v1.1.0
-        with:
-          path: Library
-          key: Library-test-project-${{ matrix.targetPlatform }}
-          restore-keys: |
-            Library-test-project-
-            Library-
-      - uses: game-ci/unity-test-runner@master
-        id: testRunner
-        with:
-          projectPath: ${{ env.PROJECT_PATH }}
-          unityVersion: ${{ env.UNITY_VERSION }}
-          testMode: all
-          customParameters: "-nographics"
-      - uses: actions/upload-artifact@v1
-        with:
-          name: Test results (all modes)
-          path: ${{ steps.testRunner.outputs.artifactsPath }}
 
   build:
     needs: [checklicense]
@@ -80,5 +53,5 @@ jobs:
 
       - uses: actions/upload-artifact@v1
         with:
-          name: Build
-          path: build
+          name: Build-${{ matrix.targetPlatform }}
+          path: build/${{ matrix.targetPlatform }}
