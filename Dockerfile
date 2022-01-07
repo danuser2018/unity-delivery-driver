@@ -1,8 +1,8 @@
 FROM nginx:alpine
 
 WORKDIR /webgl
-COPY /webgl/ .
+COPY Build/ .
 
 WORKDIR /etc/nginx/conf.d
 RUN rm default.conf
-COPY webgl.conf webgl.conf
+COPY Deploy/webgl.conf webgl.conf
