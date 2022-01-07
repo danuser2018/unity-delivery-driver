@@ -50,8 +50,13 @@ jobs:
           projectPath: ${{ env.PROJECT_PATH }}
           unityVersion: ${{ env.UNITY_VERSION }}
           targetPlatform: ${{ matrix.targetPlatform }}
+          
+      - name: Move files to build
+        run: |
+            cp -r build/${{ matrix.targetPlatform }}/${{ matrix.targetPlatform }}/. build/.
+            rm -rd build/${{ matrix.targetPlatform }}
 
       - uses: actions/upload-artifact@v1
         with:
           name: Build-${{ matrix.targetPlatform }}
-          path: build/${{ matrix.targetPlatform }}
+          path: build
