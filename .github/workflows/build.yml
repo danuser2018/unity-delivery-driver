@@ -25,7 +25,7 @@ jobs:
   build:
     needs: [checklicense]
     if: needs.checklicense.outputs.is_unity_license_set == 'true'
-    name: Build for ${TARGET_PLATFORM} on version ${UNITY_VERSION}
+    name: Build
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -36,21 +36,21 @@ jobs:
 
       - uses: actions/cache@v1.1.0
         with:
-          path: ${PROJECT_PATH}/Library
-          key: Library-${PROJECT_PATH}-${TARGET_PLATFORM}
+          path: ${{ env.PROJECT_PATH }}/Library
+          key: Library-${{ env.PROJECT_PATH }}-${{ env.TARGET_PLATFORM }}
           restore-keys: |
-            Library-${PROJECT_PATH}-
+            Library-${{env.PROJECT_PATH}}-
             Library-
       - uses: game-ci/unity-builder@v2.0-alpha-13
         with:
-          projectPath: ${PROJECT_PATH}
-          unityVersion: ${UNITY_VERSION}
-          targetPlatform: ${TARGET_PLATFORM}
+          projectPath: ${{ env.PROJECT_PATH }}
+          unityVersion: ${{ env.UNITY_VERSION }}
+          targetPlatform: ${{ env.TARGET_PLATFORM }}
 
       - uses: actions/upload-artifact@v1
         with:
-          name: Build-${TARGET_PLATFORM}
-          path: build/${TARGET_PLATFORM}/${TARGET_PLATFORM}
+          name: Build-${{ env.TARGET_PLATFORM }}
+          path: build/${{ env.TARGET_PLATFORM }}/${{ env.TARGET_PLATFORM }}
           
   deploy:
     needs: [build]
@@ -63,17 +63,17 @@ jobs:
 
       - uses: actions/cache@v1.1.0
         with:
-          path: ${PROJECT_PATH}/Library
-          key: Library-${PROJECT_PATH}-${TARGET_PLATFORM}
+          path: ${{ env.PROJECT_PATH }}/Library
+          key: Library-${{ env.PROJECT_PATH }}-${{ env.TARGET_PLATFORM }}
           restore-keys: |
-            Library-${PROJECT_PATH}-
+            Library-${{ env.PROJECT_PATH }}-
             Library-
 
       - name: Download build artifact
         id: download
         uses: actions/download-artifact@v2
         with:
-          name: Build-${TARGET_PLATFORM}
+          name: Build-${{ env.TARGET_PLATFORM }}
           path: build
           
       - name: Unzip files to build folder
