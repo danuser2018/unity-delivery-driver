@@ -75,14 +75,7 @@ jobs:
         with:
           name: Build-${{ env.TARGET_PLATFORM }}
           path: build
-          
-      - name: Unzip files to build folder
-        working-directory: build
-        run: |
-            7z x ${{ steps.download.outputs.download-path }}
             
       - name: ls
         run: |
-         ls -la
-         cd ..
-         ls -la
+         ls -la build
