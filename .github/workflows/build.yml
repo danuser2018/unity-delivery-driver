@@ -1,14 +1,13 @@
-name: Build
+name: Build & Deploy
 
 on:
   workflow_dispatch: {}
 
 env:
-  # License
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-  # Project
   UNITY_VERSION: 2021.2.5f1
   PROJECT_PATH: .
+  TARGET_PLATFORM: WebGL
 
 jobs:
   checklicense:
@@ -26,13 +25,10 @@ jobs:
   build:
     needs: [checklicense]
     if: needs.checklicense.outputs.is_unity_license_set == 'true'
-    name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
+    name: Build for ${{ env.TARGET_PLATFORM }} on version ${{ env.UNITY_VERSION }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix:
-        targetPlatform:
-          - WebGL
     steps:
       - uses: actions/checkout@v2
         with:
@@ -40,19 +36,53 @@ jobs:
 
       - uses: actions/cache@v1.1.0
         with:
-          path: ${{ matrix.projectPath }}/Library
-          key: Library-${{ matrix.projectPath }}-${{ matrix.targetPlatform }}
+          path: ${{ env.PROJECT_PATH }}/Library
+          key: Library-${{ env.PROJECT_PATH }}-${{ env.TARGET_PLATFORM }}
           restore-keys: |
-            Library-${{ matrix.projectPath }}-
+            Library-${{ env.PROJECT_PATH }}-
             Library-
       - uses: game-ci/unity-builder@v2.0-alpha-13
         with:
           projectPath: ${{ env.PROJECT_PATH }}
           unityVersion: ${{ env.UNITY_VERSION }}
-          targetPlatform: ${{ matrix.targetPlatform }}
-          customParameters: -nographics _savePath "../build"
+          targetPlatform: ${{ env.TARGET_PLATFORM }}
 
       - uses: actions/upload-artifact@v1
         with:
-          name: Build-${{ matrix.targetPlatform }}
+          name: Build-${{ env.TARGET_PLATFORM }}
+          path: build/${{ env.TARGET_PLATFORM }}/${{ env.TARGET_PLATFORM }}
+          
+  deploy:
+    needs: [build]
+    name: Deploy to Heroku
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v2
+        with:
+          lfs: true
+
+      - uses: actions/cache@v1.1.0
+        with:
+          path: ${{ env.PROJECT_PATH }}/Library
+          key: Library-${{ env.PROJECT_PATH }}-${{ env.TARGET_PLATFORM }}
+          restore-keys: |
+            Library-${{ env.PROJECT_PATH }}-
+            Library-
+
+      - name: Download build artifact
+        id: download
+        uses: actions/download-artifact@v2
+        with:
+          name: Build-${{ env.TARGET_PLATFORM }}
           path: build
+          
+      - name: Unzip files to build folder
+        working-directory: build
+        run: |
+            7z x ${{ steps.download.outputs.download-path }}
+            
+      - name: ls
+        run: |
+         ls -la
+         cd ..
+         ls -la
