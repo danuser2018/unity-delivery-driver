@@ -37,6 +37,10 @@ Incluye algunas características que me han parecido interesantes:
 
 El juego cuenta con un juego de tests básicos en 'edit mode'. Estos tests pueden ser corridos en local desde el IDE, o bien utilizando la pipeline de 'Tests'. En cualquier caso, siempre que se haga una PR a la rama 'main' los tests se correrán automáticamente.
 
+Para poder definir tests debes [activar el framework de testing en Unity](https://docs.unity3d.com/Packages/com.unity.test-framework@1.1/manual/index.html)
+
+Recuerda que para que tu código sea 'testable' deberás de generar un Assembly para tus clases, e incluir una referencia a dicho Assembly en el Assembly de tests.
+
 ## Compilación/Empaquetado
 
 Compila en formato WebGL, lo que permite ejecutar en cualquier navegador. Hay que tener en cuenta que el formato de compresión que se utiliza por defecto (brotli) no es reconocido por todos los navegadores, por lo que es recomendable cambiar el modo de compresión a gzip. [Aquí puedes encontrar cómo hacerlo](https://docs.unity3d.com/Manual/webgl-deploying.html).
