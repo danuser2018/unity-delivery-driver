@@ -4,7 +4,5 @@ WORKDIR /webgl
 COPY build/ .
 
 WORKDIR /etc/nginx/templates
-COPY deployment/webgl.conf.template webgl.conf.template
+COPY deployment/default.conf.template default.conf.template
 
-WORKDIR /etc/nginx/conf.d
-RUN rm default.conf
